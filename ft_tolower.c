@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:12:18 by asando            #+#    #+#             */
-/*   Updated: 2025/03/11 08:32:34 by asando           ###   ########.fr       */
+/*   Created: 2025/03/11 08:28:17 by asando            #+#    #+#             */
+/*   Updated: 2025/03/11 08:31:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
  * FUNCTION (G)
- * ==> to count how many character is in a string (char*) 
+ * ==> Change input character to lowercase 
  * CALLED FUNCTION
  * ==> none
  * PARAMETER (n = 1)
- * ==> 1. int
+ * ==> 1.int
  * WORK
- * ==> using control loop while it traverse inside a string
- * ==> while traversing adding 1 into variable count
+ * ==> add 32 to character to get ASCII number of lowercase character
  * RETURN
- * ==> length of parameter
+ * ==> Lowercase character
  * REFERENCE
- * ==> strlen from string.h
+ * ==> tolower in ctype.h
 */
-#include "libft.h"
-
-size_t	ft_strlen(const char *str)
+int	ft_tolower(int c)
 {
-	size_t	count;
-
-	count = 0;
-	while (str[count] != '\0')
-		count++;
-	return (count);
+	if (c >= 'A' && c <= 'Z')
+		c = c + 32;
+	return (c);
 }

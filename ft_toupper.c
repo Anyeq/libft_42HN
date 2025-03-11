@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 08:12:18 by asando            #+#    #+#             */
-/*   Updated: 2025/03/11 08:32:34 by asando           ###   ########.fr       */
+/*   Created: 2025/03/11 08:23:29 by asando            #+#    #+#             */
+/*   Updated: 2025/03/11 08:27:22 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
  * FUNCTION (G)
- * ==> to count how many character is in a string (char*) 
+ * ==> Change charachter input to uppercase 
  * CALLED FUNCTION
  * ==> none
  * PARAMETER (n = 1)
- * ==> 1. int
+ * ==> 1.int
  * WORK
- * ==> using control loop while it traverse inside a string
- * ==> while traversing adding 1 into variable count
+ * ==> charachter is substracted by 32 to get the ASCII num of uppercase
  * RETURN
- * ==> length of parameter
+ * ==> uppercase character
  * REFERENCE
- * ==> strlen from string.h
+ * ==> toupper in ctype.h
 */
-#include "libft.h"
-
-size_t	ft_strlen(const char *str)
+int	ft_toupper(int c)
 {
-	size_t	count;
-
-	count = 0;
-	while (str[count] != '\0')
-		count++;
-	return (count);
+	if (c >= 'a' && c <= 'z')
+		c = c - 32;
+	return (c);
 }
