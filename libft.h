@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 07:45:53 by asando            #+#    #+#             */
-/*   Updated: 2025/03/12 15:33:12 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/12 15:54:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -58,7 +58,7 @@ size_t	ft_strlen(const char *str);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *str, int c);
 //char	*ft_strtrim(char const *s1, char const *set);
-//char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 #endif
