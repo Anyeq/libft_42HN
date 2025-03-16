@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 07:45:53 by asando            #+#    #+#             */
-/*   Updated: 2025/03/14 13:56:17 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/16 21:30:04 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -17,6 +17,12 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *str, size_t n);
