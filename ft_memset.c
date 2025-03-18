@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 07:33:42 by asando            #+#    #+#             */
-/*   Updated: 2025/03/12 07:40:26 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/18 14:43:19 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -28,8 +28,8 @@
 */
 void	*ft_memset(void *str, int c, size_t n)
 {
-	size_t	i;
-	char	*strs;
+	size_t			i;
+	unsigned char	*strs;
 
 	strs = (unsigned char *)str;
 	i = 0;

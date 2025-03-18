@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 07:20:36 by asando            #+#    #+#             */
-/*   Updated: 2025/03/12 07:26:37 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/18 12:54:58 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -34,3 +34,4 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 	while ((i < n) && (str1[i] - str2[i]) == 0 && str1[i] != '\0')
 		i++;
 	return (str1[i] - str2[i]);
+}
