@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 13:51:58 by asando            #+#    #+#             */
-/*   Updated: 2025/03/12 13:55:05 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 08:55:00 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -32,7 +32,11 @@ int	ft_memcmp(const char *s1, const char *s2, size_t n)
 	size_t	i;
 
 	i = 0;
-	while ((i < n) && (s1[i] - s2[i]) == 0)
+	while (i < n)
+	{
+		if ((unsigned char)s1[i] - (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
-	return (s1[i] - s2[i]);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 08:36:50 by asando            #+#    #+#             */
-/*   Updated: 2025/03/11 08:51:20 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 08:33:51 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -35,11 +35,11 @@ char	*ft_strchr(const char *str, int c)
 	i = 0;
 	while (str_uc[i] != '\0')
 	{
-		if (str_uc[i] == c)
+		if ((unsigned char)str_uc[i] == (unsigned char)c)
 			return (&str_uc[i]);
 		i++;
 	}
-	if (str_uc[i] == c)
+	if ((unsigned char)str_uc[i] == (unsigned char)c)
 		return (&str_uc[i]);
 	return (NULL);
 }
