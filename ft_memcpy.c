@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:27:42 by asando            #+#    #+#             */
-/*   Updated: 2025/03/19 09:03:59 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:45:18 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -33,7 +33,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	size_t		i;
 
 	i = 0;
-	if (!dest || !src)
+	if (!dest && !src)
 		return (NULL);
 	str_dest = (char *)dest;
 	str_src = (const char *)src;

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 12:54:08 by asando            #+#    #+#             */
-/*   Updated: 2025/03/14 13:43:50 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 13:54:13 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -32,8 +32,10 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	int		len;
 
 	i = 0;
+	if (!s || !f)
+		return (NULL);
 	len = ft_strlen(s);
-	res = malloc(len * sizeof(char));
+	res = malloc((len + 1) * sizeof(char));
 	if (res == NULL)
 		return (NULL);
 	while (s[i] != '\0')

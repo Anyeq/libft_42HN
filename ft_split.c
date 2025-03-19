@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:14:22 by asando            #+#    #+#             */
-/*   Updated: 2025/03/14 12:21:28 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 17:53:42 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -27,14 +27,21 @@
 static size_t	count_word(const char *str, char delimiter)
 {
 	size_t	res;
+	int		in_word;
 	size_t	i;
 
-	res = 1;
+	res = 0;
 	i = 0;
+	in_word = 1;
 	while (str[i] != '\0')
 	{
-		if (str[i] == delimiter)
+		if ((unsigned char)str[i] != (unsigned char)delimiter && in_word)
+		{
 			res++;
+			in_word = 0;
+		}
+		if (str[i] == delimiter)
+			in_word = 1;
 		i++;
 	}
 	return (res);
@@ -59,15 +66,21 @@ static size_t	count_word(const char *str, char delimiter)
 static char	*keep_word(char const *s, char c)
 {
 	char	*buff;
-	size_t	i;
+	unsigned int	delimiter_num;
+	unsigned int	not_delimiter;
+	unsigned int	len;
 
-	i = 0;
-	while (s[i] != c && s[i] != '\0')
-		i++;
-	buff = malloc((i + 1) * sizeof(char));
+	delimiter_num = 0;
+	while (s[delimiter_num] == c)
+		delimiter_num++;
+	not_delimiter = delimiter_num;
+	while (s[not_delimiter] != c && s[not_delimiter] != '\0')
+		not_delimiter++;
+	len = not_delimiter - delimiter_num;
+	buff = malloc((len + 1) * sizeof(char));
 	if (buff == NULL)
 		return (NULL);
-	ft_strlcpy(buff, s, i + 1);
+	ft_strlcpy(buff, &s[delimiter_num], len + 1);
 	return (buff);
 }
 
@@ -97,6 +110,8 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	s_temp = (char *)s;
 	wc = count_word(s, c);
 	str_arr = malloc((wc + 1) * sizeof(char *));

@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:44:19 by asando            #+#    #+#             */
-/*   Updated: 2025/03/14 13:47:52 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 13:51:56 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
@@ -27,6 +27,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	int	i;
 
+	if (!s || !f)
+		return ;
 	i = 0;
 	while (s[i] != '\0')
 	{

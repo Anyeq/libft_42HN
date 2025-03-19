@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 12:23:29 by asando            #+#    #+#             */
-/*   Updated: 2025/03/18 13:32:49 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:29:05 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -67,6 +67,31 @@ static void	check_num(int *n, char *char_num, int *i)
 }
 
 /*
+ * FUNCTION (l)
+ * ==> solving case if parameter is INT_MIN
+ * CALLED FUNCTION
+ * ==> malloc(stdlib)
+ * PARAMETER (n = 0)
+ * ==> none 
+ * WORK
+ * ==> allocate enough memory and copy INT_MIN value into it
+ * RETURN
+ * ==> address of char * or NULL
+ * REFERENCE
+ * ==>
+*/
+static char	*int_mincase(void)
+{
+	char	*res;
+
+	res = malloc(12 * sizeof(char));
+	if (res == NULL)
+		return (NULL);
+	ft_strlcpy(res, "-2147483648", 12);
+	return (res);
+}
+
+/*
  * FUNCTION (G)
  * ==> convert int to string (ex: 123 to "123") 
  * CALLED FUNCTION
@@ -85,16 +110,14 @@ static void	check_num(int *n, char *char_num, int *i)
 char	*ft_itoa(int n)
 {
 	char	*num_string;
-	char	char_num[11];
+	char	char_num[12];
 	int		i;
 
 	i = 0;
 	if (n == INT_MIN)
-	{
-		num_string = malloc(11 * sizeof(char));
-		num_string = "-2147483648";
-		return (num_string);
-	}
+		return (int_mincase());
+	if (n == 0)
+		char_num[i++] = '0';
 	if (n < 0)
 		check_num(&n, char_num, &i);
 	while (n > 0)
@@ -104,7 +127,9 @@ char	*ft_itoa(int n)
 		n = n / 10;
 	}
 	char_num[i] = '\0';
-	num_string = malloc(i * sizeof(char));
+	num_string = malloc((i + 1) * sizeof(char));
+	if (num_string == NULL)
+		return (NULL);
 	reverse(num_string, char_num, i);
 	return (num_string);
 }

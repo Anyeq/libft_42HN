@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:11:13 by asando            #+#    #+#             */
-/*   Updated: 2025/03/17 13:14:17 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 13:43:33 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -32,12 +32,14 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*curr;
 	t_list	*temp;
 
+	if (lst == NULL || *lst == NULL)
+		return ;
 	curr = *lst;
 	while (curr != NULL)
 	{
 		temp = curr;
 		curr = curr->next;
-		del(temp);
+		del(temp->content);
 		free(temp);
 	}
 	*lst = NULL;
