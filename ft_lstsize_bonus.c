@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 21:52:45 by asando            #+#    #+#             */
-/*   Updated: 2025/03/16 22:15:26 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/19 13:20:02 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -30,10 +30,13 @@ int	ft_lstsize(t_list *lst)
 	int	count;
 
 	count = 0;
+	if (!lst)
+		return (0);
 	while (lst->next != NULL)
 	{
 		lst = lst->next;
 		count++;
 	}
+	count++;
 	return (count);
 }
