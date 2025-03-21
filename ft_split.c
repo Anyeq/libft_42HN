@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:14:22 by asando            #+#    #+#             */
-/*   Updated: 2025/03/21 01:16:50 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:01:51 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -142,7 +142,7 @@ char	**ft_split(char const *s, char c)
 		s_temp = ft_strchr(s_temp, c);
 		i++;
 	}
-	if (c == '\0')
+	if (c == '\0' && s[0] != '\0')
 		str_arr[i++] = keep_word(s_temp, c);
 	str_arr[i] = NULL;
 	return (str_arr);

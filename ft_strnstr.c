@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:54 by asando            #+#    #+#             */
-/*   Updated: 2025/03/21 01:04:11 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/21 14:39:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -26,26 +26,6 @@
  * REFERENCE
  * ==> strnstr in string.h
 */
-//static size_t	find_str(size_t *i, size_t len, const char *big, const char *little)
-//{
-//	size_t	j;
-//	size_t	iteri;
-//
-//	j = 0;
-//	iteri = *i;
-//	while (big[iteri] != '\0' && little[j] != '\0'
-//		&& big[iteri] == little[j] && (iteri < len))
-//	{
-//		iteri++;
-//		j++;
-//	}
-//	*i = iteri - j;
-//	return (j);
-//}
-//		nstr_found = find_str(&i, len, big, little);
-//		if (nstr_found == little_len)
-//			return ((char *)&big[i]);
-
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;

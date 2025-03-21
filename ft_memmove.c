@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:46:20 by asando            #+#    #+#             */
-/*   Updated: 2025/03/12 14:52:49 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:39:13 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -25,28 +25,30 @@
  * REFERENCE
  * ==> memmove in string.h
 */
+
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t		i;
-	size_t		j;
-	char		str_buff[n];
-	const char	*src_str;
-	char		*dest_str;
+	size_t	i;
 
-	src_str = src;
-	dest_str = dest;
+	if (!dest && !src)
+		return (dest);
 	i = 0;
-	j = 0;
-	while (i < n)
+	if (src < dest && dest < (src + n))
 	{
-		str_buff[i] = src_str[i];
-		i++;
+		i = n;
+		while (i != 0)
+		{
+			i = i - 1;
+			((char *)dest)[i] = ((char *)src)[i];
+		}
 	}
-	while (j < n)
+	else
 	{
-		dest_str[j] = str_buff[j];
-		j++;
+		while (i < n)
+		{
+			((char *)dest)[i] = ((char *)src)[i];
+			i++;
+		}
 	}
-	dest_str[j] = '\0';
-	return (dest_str);
+	return (dest);
 }
