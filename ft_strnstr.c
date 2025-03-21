@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:34:54 by asando            #+#    #+#             */
-/*   Updated: 2025/03/18 23:14:07 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/21 01:04:11 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -26,40 +26,49 @@
  * REFERENCE
  * ==> strnstr in string.h
 */
-static size_t	find_str(size_t *i, size_t len, char *big_uc, const char *little)
-{
-	size_t	j;
-	size_t	iteri;
-
-	j = 0;
-	iteri = *i;
-	while (big_uc[iteri] != '\0' && little[j] != '\0'
-		&& big_uc[iteri] == little[j] && (iteri < len))
-	{
-		iteri++;
-		j++;
-	}
-	*i = iteri - j;
-	return (j);
-}
+//static size_t	find_str(size_t *i, size_t len, const char *big, const char *little)
+//{
+//	size_t	j;
+//	size_t	iteri;
+//
+//	j = 0;
+//	iteri = *i;
+//	while (big[iteri] != '\0' && little[j] != '\0'
+//		&& big[iteri] == little[j] && (iteri < len))
+//	{
+//		iteri++;
+//		j++;
+//	}
+//	*i = iteri - j;
+//	return (j);
+//}
+//		nstr_found = find_str(&i, len, big, little);
+//		if (nstr_found == little_len)
+//			return ((char *)&big[i]);
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	little_len;
-	size_t		nstr_found;
-	char	*big_uc;
+	size_t	j;
 
 	i = 0;
-	big_uc = (char *)big;
+	j = 0;
 	little_len = ft_strlen(little);
 	if (little_len == 0)
-		return (&big_uc[0]);
-	while ((big_uc[i] != '\0') && (i < len))
-	{ 
-		nstr_found = find_str(&i, len, &big_uc[i], little);
-		if (nstr_found == little_len)
-			return (&big_uc[i]);
+		return ((char *)&big[0]);
+	while ((big[i] != '\0') && (i < len))
+	{
+		while (big[i] != '\0' && little[j] != '\0'
+			&& big[i] == little[j] && (i < len))
+		{
+			i++;
+			j++;
+		}
+		i = i - j;
+		if (j == little_len)
+			return ((char *)&big[i]);
+		j = 0;
 		i++;
 	}
 	return (NULL);

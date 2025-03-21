@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:14:22 by asando            #+#    #+#             */
-/*   Updated: 2025/03/19 17:53:42 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/21 01:16:50 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -44,6 +44,8 @@ static size_t	count_word(const char *str, char delimiter)
 			in_word = 1;
 		i++;
 	}
+	if ((unsigned char)str[i] == (unsigned char)delimiter)
+		res++;
 	return (res);
 }
 
@@ -65,7 +67,7 @@ static size_t	count_word(const char *str, char delimiter)
 */
 static char	*keep_word(char const *s, char c)
 {
-	char	*buff;
+	char			*buff;
 	unsigned int	delimiter_num;
 	unsigned int	not_delimiter;
 	unsigned int	len;
@@ -82,6 +84,22 @@ static char	*keep_word(char const *s, char c)
 		return (NULL);
 	ft_strlcpy(buff, &s[delimiter_num], len + 1);
 	return (buff);
+}
+
+static char	*find_ndelimiter(char const *s, char c)
+{
+	unsigned int	res;
+	char			*str;
+
+	str = (char *)s;
+	res = 0;
+	while (str[res] != '\0')
+	{
+		if (str[res] != c)
+			return (&str[res]);
+		res++;
+	}
+	return (NULL);
 }
 
 /*
@@ -117,12 +135,15 @@ char	**ft_split(char const *s, char c)
 	str_arr = malloc((wc + 1) * sizeof(char *));
 	if (str_arr == NULL)
 		return (NULL);
-	while (i < wc && wc > 1)
+	while (i < wc && (wc + 1) > 1 && c != '\0')
 	{
 		str_arr[i] = keep_word(s_temp, c);
-		s_temp = ft_strchr(s_temp, c) + 1;
+		s_temp = find_ndelimiter(s_temp, c);
+		s_temp = ft_strchr(s_temp, c);
 		i++;
 	}
+	if (c == '\0')
+		str_arr[i++] = keep_word(s_temp, c);
 	str_arr[i] = NULL;
 	return (str_arr);
 }
