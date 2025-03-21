@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:14:22 by asando            #+#    #+#             */
-/*   Updated: 2025/03/21 18:35:25 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/21 20:01:27 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -75,7 +75,7 @@ static char	*keep_word(char const *s, char c)
 	delimiter_num = 0;
 	if (!s)
 		return (NULL);
-	while (s[delimiter_num] == c)
+	while (s[delimiter_num] == c && c != '\0')
 		delimiter_num++;
 	not_delimiter = delimiter_num;
 	while (s[not_delimiter] != c && s[not_delimiter] != '\0')
@@ -121,6 +121,18 @@ static char	*find_ndelimiter(char const *s, char c)
 	return (NULL);
 }
 
+static int	clean_if_null(char **str, size_t i)
+{
+	if (!str[i])
+	{
+		while (i > 0)
+			free(str[--i]);
+		free(str);
+		return (1);
+	}
+	return (0);
+}
+
 /*
  * FUNCTION (G)
  * ==> splitting a src into part based on delimiter
@@ -154,25 +166,27 @@ char	**ft_split(char const *s, char c)
 	str_arr = malloc((wc + 1) * sizeof(char *));
 	if (str_arr == NULL)
 		return (NULL);
-	while (i < wc && (wc + 1) > 1 && c != '\0')
+	while (i < wc && (wc + 1) > 1)
 	{
 		str_arr[i] = keep_word(s_temp, c);
-		if (!str_arr[i])
-		{
-			while (i > 0)
-				free(str_arr[--i]);
-			free(str_arr);
+		if (clean_if_null(str_arr, i))
 			return (NULL);
+		i++;
+		if (c == '\0')
+		{
+			str_arr[i] = NULL;
+			return (str_arr);
 		}
 		s_temp = find_ndelimiter(s_temp, c);
 		s_temp = ft_strchr(s_temp, c);
-		i++;
 	}
-	if (c == '\0' && s[0] != '\0')
-	{
-		str_arr[i] = keep_word(s_temp, c);
-		i++;
-	}
+	//if (c == '\0' && s[0] != '\0')
+	//{
+	//	str_arr[i] = keep_word(s_temp, c);
+	//	if (clean_if_null(str_arr, i))
+	//		return (NULL);
+	//	i++;
+	//}
 	str_arr[i] = NULL;
 	return (str_arr);
 }
