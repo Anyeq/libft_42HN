@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/16 14:20:33 by asando            #+#    #+#              #
-#    Updated: 2025/03/18 12:59:19 by asando           ###   ########.fr        #
+#    Updated: 2025/03/21 15:20:32 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 COMP = cc
@@ -37,15 +37,14 @@ $(NAME): $(OBJS)
 	ar crs $@ $^
 
 clean:
-	rm -rf $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
-fclean:
-	rm -rf $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-re:
-	fclean $(NAME)
+re: fclean all
 
 bonus: $(OBJS) $(BONUS_OBJS)
-	ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+	ar crs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 .PHONY: all clean fclean re bonus

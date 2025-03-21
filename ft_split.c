@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:14:22 by asando            #+#    #+#             */
-/*   Updated: 2025/03/21 13:01:51 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/21 18:35:25 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -33,7 +33,7 @@ static size_t	count_word(const char *str, char delimiter)
 	res = 0;
 	i = 0;
 	in_word = 1;
-	while (str[i] != '\0')
+	while (delimiter != '\0' && str[i] != '\0')
 	{
 		if ((unsigned char)str[i] != (unsigned char)delimiter && in_word)
 		{
@@ -44,7 +44,7 @@ static size_t	count_word(const char *str, char delimiter)
 			in_word = 1;
 		i++;
 	}
-	if ((unsigned char)str[i] == (unsigned char)delimiter)
+	if (delimiter == '\0')
 		res++;
 	return (res);
 }
@@ -73,12 +73,16 @@ static char	*keep_word(char const *s, char c)
 	unsigned int	len;
 
 	delimiter_num = 0;
+	if (!s)
+		return (NULL);
 	while (s[delimiter_num] == c)
 		delimiter_num++;
 	not_delimiter = delimiter_num;
 	while (s[not_delimiter] != c && s[not_delimiter] != '\0')
 		not_delimiter++;
 	len = not_delimiter - delimiter_num;
+	if (len == 0)
+		return (NULL);
 	buff = malloc((len + 1) * sizeof(char));
 	if (buff == NULL)
 		return (NULL);
@@ -86,6 +90,21 @@ static char	*keep_word(char const *s, char c)
 	return (buff);
 }
 
+/*
+ * FUNCTION (l)
+ * ==> find a charachter that is not delimiter to tackel multiple delimiter
+ * CALLED FUNCTION
+ * ==> none
+ * PARAMETER (n = 2)
+ * ==> 1. const char * 2. char
+ * WORK
+ * ==> traverse string and find the charachter that is not delimiter
+ * RETURN
+ * ==> NULL if non delimiter is not found
+ * ==> addres of a non delimiter charachter
+ * REFERENCE
+ * ==>
+*/
 static char	*find_ndelimiter(char const *s, char c)
 {
 	unsigned int	res;
@@ -138,12 +157,22 @@ char	**ft_split(char const *s, char c)
 	while (i < wc && (wc + 1) > 1 && c != '\0')
 	{
 		str_arr[i] = keep_word(s_temp, c);
+		if (!str_arr[i])
+		{
+			while (i > 0)
+				free(str_arr[--i]);
+			free(str_arr);
+			return (NULL);
+		}
 		s_temp = find_ndelimiter(s_temp, c);
 		s_temp = ft_strchr(s_temp, c);
 		i++;
 	}
 	if (c == '\0' && s[0] != '\0')
-		str_arr[i++] = keep_word(s_temp, c);
+	{
+		str_arr[i] = keep_word(s_temp, c);
+		i++;
+	}
 	str_arr[i] = NULL;
 	return (str_arr);
 }
