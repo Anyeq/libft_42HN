@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:14:22 by asando            #+#    #+#             */
-/*   Updated: 2025/03/21 20:01:27 by asando           ###   ########.fr       */
+/*   Updated: 2025/03/23 21:19:12 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -35,7 +35,7 @@ static size_t	count_word(const char *str, char delimiter)
 	in_word = 1;
 	while (delimiter != '\0' && str[i] != '\0')
 	{
-		if ((unsigned char)str[i] != (unsigned char)delimiter && in_word)
+		if (str[i] != delimiter && in_word)
 		{
 			res++;
 			in_word = 0;
@@ -68,25 +68,19 @@ static size_t	count_word(const char *str, char delimiter)
 static char	*keep_word(char const *s, char c)
 {
 	char			*buff;
-	unsigned int	delimiter_num;
 	unsigned int	not_delimiter;
-	unsigned int	len;
 
-	delimiter_num = 0;
+	not_delimiter = 0;
 	if (!s)
 		return (NULL);
-	while (s[delimiter_num] == c && c != '\0')
-		delimiter_num++;
-	not_delimiter = delimiter_num;
 	while (s[not_delimiter] != c && s[not_delimiter] != '\0')
 		not_delimiter++;
-	len = not_delimiter - delimiter_num;
-	if (len == 0)
+	if (not_delimiter == 0)
 		return (NULL);
-	buff = malloc((len + 1) * sizeof(char));
+	buff = malloc((not_delimiter + 1) * sizeof(char));
 	if (buff == NULL)
 		return (NULL);
-	ft_strlcpy(buff, &s[delimiter_num], len + 1);
+	ft_strlcpy(buff, s, not_delimiter + 1);
 	return (buff);
 }
 
@@ -105,22 +99,39 @@ static char	*keep_word(char const *s, char c)
  * REFERENCE
  * ==>
 */
-static char	*find_ndelimiter(char const *s, char c)
+static char	*find_word(char const *s, char c)
 {
-	unsigned int	res;
+	unsigned int	i;
 	char			*str;
 
 	str = (char *)s;
-	res = 0;
-	while (str[res] != '\0')
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (str[res] != c)
-			return (&str[res]);
-		res++;
+		if (str[i] != c)
+			return (&str[i]);
+		i++;
 	}
 	return (NULL);
 }
 
+/*
+ * FUNCTION (l)
+ * ==> clean memorry allocation if it failed to allocate
+ * CALLED FUNCTION
+ * ==> none
+ * PARAMETER (n = 2)
+ * ==> 1. char ** 2. size_t
+ * WORK
+ * ==> check if allocation return NULL
+ * ==> if yes traverse every element of array and free it
+ * ==> and the end free the array it self
+ * RETURN
+ * ==> 1 if free is called
+ * ==> 0 if free is not called or allocation success
+ * REFERENCE
+ * ==>
+* */
 static int	clean_if_null(char **str, size_t i)
 {
 	if (!str[i])
@@ -135,58 +146,46 @@ static int	clean_if_null(char **str, size_t i)
 
 /*
  * FUNCTION (G)
- * ==> splitting a src into part based on delimiter
+ * ==> split string base on delimiter
  * CALLED FUNCTION
- * ==> count_word(l), malloc(stdlibg.h), keep_word(l), ft_strchr(libft.h)
+ * ==> count_word(l), malloc(stdlib.h), find_word(l), keep_word(l)
+ * ==> clean_if_null(l), ft_strchr(libft.h)
  * PARAMETER (n = 2)
- * ==> 1. const char * 2. char
+ * ==> 1. char const * 2. char
  * WORK
- * ==> count how many part it will be making
- * ==> allocate enough memory to keep the part
- * ==> keep the word
- * ==> tracking with ft_strchr which delimiter position we are working on
+ * ==> count how many split part would be created
+ * ==> allocate memory for array
+ * ==> keep part and put it into array
  * RETURN
- * ==> NULL if allocation failed
- * ==> addres of a list of parts that has been created trough splitting
+ * ==> pointer to array if success
+ * ==> NULL if problem occure
  * REFERENCE
  * ==>
-*/
+* */
 char	**ft_split(char const *s, char c)
 {
-	char	**str_arr;
-	char	*s_temp;
-	size_t	wc;
-	size_t	i;
+	char	**res;
+	char	*temp;
+	size_t	n_word;
+	size_t	n_arr;
 
-	i = 0;
 	if (!s)
 		return (NULL);
-	s_temp = (char *)s;
-	wc = count_word(s, c);
-	str_arr = malloc((wc + 1) * sizeof(char *));
-	if (str_arr == NULL)
+	n_word = count_word(s, c);
+	res = malloc((n_word + 1) * sizeof(char *));
+	if (res == NULL)
 		return (NULL);
-	while (i < wc && (wc + 1) > 1)
+	n_arr = 0;
+	temp = (char *)s;
+	while (n_arr < n_word && n_word > 0 && s[0] != '\0')
 	{
-		str_arr[i] = keep_word(s_temp, c);
-		if (clean_if_null(str_arr, i))
+		temp = find_word(temp, c);
+		res[n_arr] = keep_word(temp, c);
+		if (clean_if_null(res, n_arr))
 			return (NULL);
-		i++;
-		if (c == '\0')
-		{
-			str_arr[i] = NULL;
-			return (str_arr);
-		}
-		s_temp = find_ndelimiter(s_temp, c);
-		s_temp = ft_strchr(s_temp, c);
+		temp = ft_strchr(temp, c);
+		n_arr++;
 	}
-	//if (c == '\0' && s[0] != '\0')
-	//{
-	//	str_arr[i] = keep_word(s_temp, c);
-	//	if (clean_if_null(str_arr, i))
-	//		return (NULL);
-	//	i++;
-	//}
-	str_arr[i] = NULL;
-	return (str_arr);
+	res[n_arr] = NULL;
+	return (res);
 }
