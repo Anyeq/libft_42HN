@@ -6,10 +6,10 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/16 14:20:33 by asando            #+#    #+#              #
-#    Updated: 2025/03/21 15:20:32 by asando           ###   ########.fr        #
+#    Updated: 2025/03/27 08:57:58 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-COMP = cc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
