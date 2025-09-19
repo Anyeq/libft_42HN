@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:14:22 by asando            #+#    #+#             */
-/*   Updated: 2025/03/23 21:19:12 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/28 18:11:41 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -169,7 +169,7 @@ char	**ft_split(char const *s, char c)
 	size_t	n_word;
 	size_t	n_arr;
 
-	if (!s)
+	if (s == NULL)
 		return (NULL);
 	n_word = count_word(s, c);
 	res = malloc((n_word + 1) * sizeof(char *));

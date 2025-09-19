@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 07:28:59 by asando            #+#    #+#             */
-/*   Updated: 2025/03/19 08:44:50 by asando           ###   ########.fr       */
+/*   Updated: 2025/08/07 19:21:29 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -44,8 +44,8 @@ int	ft_atoi(const char *nptr)
 	}
 	while (ft_isdigit(nptr[i]))
 	{
-		num = num * 10 + (nptr[i] - '0');
+		num = num * 10 + ((nptr[i] - '0') * sign);
 		i++;
 	}
-	return (num * sign);
+	return (num);
 }
