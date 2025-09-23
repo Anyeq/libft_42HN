@@ -6,7 +6,7 @@
 #    By: asando <asando@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 22:07:48 by asando            #+#    #+#              #
-#    Updated: 2025/09/19 11:33:58 by asando           ###   ########.fr        #
+#    Updated: 2025/09/23 12:49:30 by asando           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ DIROBJ = ../../obj/ft_printf
 
 OBJS = $(SRCS:%.c=$(DIROBJ)/%.o)
 
-NAME = libftprintf.a
+NAME = ../../libftprintf.a
 
 LIBFT = ../../libft.a
 
