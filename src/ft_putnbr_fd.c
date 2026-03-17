@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:01:30 by asando            #+#    #+#             */
-/*   Updated: 2025/03/19 08:29:08 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/17 21:22:30 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -27,28 +27,43 @@
  * REFERENCE
  * ==>
 */
+
+static int	ft_is_intmin(int n, int fd)
+{
+	ssize_t	ignored;
+
+	if (n == INT_MIN)
+	{
+		ignored = write(fd, "-2147483648", 11);
+		(void)ignored;
+		return (1);
+	}
+	return (0);
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	c;
+	ssize_t	ignored;
 
 	if (n == 0)
 	{
-		write(fd, "0", 1);
+		ignored = write(fd, "0", 1);
+		(void)ignored;
 		return ;
 	}
-	if (n == INT_MIN)
-	{
-		write(fd, "-2147483648", 11);
+	if (ft_is_intmin(n, fd))
 		return ;
-	}
 	if (n < 0)
 	{
-		write(fd, "-", 1);
+		ignored = write(fd, "-", 1);
+		(void)ignored;
 		n = n * -1;
 	}
 	if (n / 10 > 0)
 		ft_putnbr_fd(n / 10, fd);
 	c = (n % 10) + '0';
-	write(fd, &c, 1);
+	ignored = write(fd, &c, 1);
+	(void)ignored;
 	return ;
 }
