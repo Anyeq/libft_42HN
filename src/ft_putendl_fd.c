@@ -6,7 +6,7 @@
 /*   By: asando <asando@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:58:35 by asando            #+#    #+#             */
-/*   Updated: 2025/03/14 17:00:25 by asando           ###   ########.fr       */
+/*   Updated: 2026/03/17 21:11:21 by asando           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -26,7 +26,10 @@
 */
 void	ft_putendl_fd(char *s, int fd)
 {
+	ssize_t	ignored;
+
 	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
+	ignored = write(fd, "\n", 1);
+	(void)ignored;
 	return ;
 }
